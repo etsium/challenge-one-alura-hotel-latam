@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alur.hotel.modelo.Huesped;
-import com.alur.hotel.modelo.Reserva;
+import com.alura.hotel.modelo.Huesped;
+import com.alura.hotel.modelo.Reserva;
 
 public class ReservaDAO {
 	private Connection con;

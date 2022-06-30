@@ -1,4 +1,4 @@
-package com.alur.hotel.modelo;
+package com.alura.hotel.modelo;
 
 import java.sql.PreparedStatement;
 import java.text.DateFormat;

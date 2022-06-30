@@ -10,10 +10,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
-import com.alur.hotel.modelo.Huesped;
-import com.alur.hotel.modelo.Reserva;
 import com.alura.hotel.controller.HuespedController;
 import com.alura.hotel.controller.ReservaController;
+import com.alura.hotel.modelo.Huesped;
+import com.alura.hotel.modelo.Reserva;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;

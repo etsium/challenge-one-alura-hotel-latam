@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-import com.alur.hotel.modelo.Huesped;
 import com.alura.hotel.dao.HuespedDAO;
 import com.alura.hotel.factory.ConnectionFactory;
+import com.alura.hotel.modelo.Huesped;
 
 public class HuespedController {
 	private HuespedDAO huespedDAO;

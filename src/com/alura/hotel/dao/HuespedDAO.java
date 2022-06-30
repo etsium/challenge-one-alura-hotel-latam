@@ -10,8 +10,8 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-import com.alur.hotel.modelo.Huesped;
-import com.alur.hotel.modelo.Reserva;
+import com.alura.hotel.modelo.Huesped;
+import com.alura.hotel.modelo.Reserva;
 
 public class HuespedDAO {
 	private Connection con;

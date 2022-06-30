@@ -9,10 +9,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Color;
 
-import com.alur.hotel.modelo.Huesped;
-import com.alur.hotel.modelo.Reserva;
 import com.alura.hotel.controller.HuespedController;
 import com.alura.hotel.controller.ReservaController;
+import com.alura.hotel.modelo.Huesped;
+import com.alura.hotel.modelo.Reserva;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;

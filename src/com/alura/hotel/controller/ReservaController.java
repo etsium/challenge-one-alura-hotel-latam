@@ -2,9 +2,9 @@ package com.alura.hotel.controller;
 
 import java.util.List;
 
-import com.alur.hotel.modelo.Reserva;
 import com.alura.hotel.dao.ReservaDAO;
 import com.alura.hotel.factory.ConnectionFactory;
+import com.alura.hotel.modelo.Reserva;
 
 public class ReservaController {
 	private ReservaDAO reservaDAO;
