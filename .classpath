@@ -6,6 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Genesys/Downloads/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/jcalendar-1.4/lib/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/jcalendar-1.4/lib/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/jcalendar-1.4/lib/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/c3p0-0.9.5.4.jar"/>
+	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/mchange-commons-java-0.2.20.jar"/>
+	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

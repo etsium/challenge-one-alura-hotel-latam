@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,9 +7,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JTextField;
+
+import com.alur.hotel.modelo.Reserva;
+import com.alura.hotel.controller.ReservaController;
+import com.mchange.v2.cfg.PropertiesConfigSource.Parse;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -19,6 +23,12 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,8 +39,16 @@ import java.awt.Toolkit;
 public class Reservas extends JFrame {
 
 	private JPanel contentPane;
+	protected Reserva reserva;
+	
+	private JDateChooser txtFechaE;
+	private JDateChooser txtFechaS;
 	private JTextField txtValor;
+	private JTextField txtid = new JTextField();
 
+	private JComboBox<String> txtFormaPago;
+	
+	private JButton btnReservar;
 	/**
 	 * Launch the application.
 	 */
@@ -50,7 +68,19 @@ public class Reservas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public void configurarDatosReservaEnFormulario(Reserva reserva) {
+		txtFechaE.setDate(reserva.getFechaEntrada());
+		txtFechaS.setDate(reserva.getFechaSalida());
+		txtValor.setText(Float.toString(reserva.getValorReserva()));
+		txtFormaPago.setSelectedItem(reserva.getMetodoPago());
+		txtid.setText(String.valueOf(reserva.getId()));
+
+		btnReservar.setText("Actualizar");
+	}
+	
 	public Reservas() {
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Reservas.class.getResource("/imagenes/calendario.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 910, 540);
@@ -69,8 +99,9 @@ public class Reservas extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JDateChooser txtFechaE = new JDateChooser();
+		txtFechaE = new JDateChooser();
 		txtFechaE.setBounds(88, 166, 235, 33);
+		txtFechaE.setMinSelectableDate(new Date());
 		panel.add(txtFechaE);
 		
 		JLabel lblNewLabel_1 = new JLabel("Fecha de Check In");
@@ -83,26 +114,28 @@ public class Reservas extends JFrame {
 		lblNewLabel_1_1.setFont(new Font("Arial", Font.PLAIN, 14));
 		panel.add(lblNewLabel_1_1);
 		
-		JDateChooser txtFechaS = new JDateChooser();
+		txtFechaS = new JDateChooser();
 		txtFechaS.setBounds(88, 234, 235, 33);
 		txtFechaS.getCalendarButton().setBackground(Color.WHITE);
-		panel.add(txtFechaS);
+		txtFechaS.setMinSelectableDate(new Date());
+		panel.add(txtFechaS);		
 		
 		txtValor = new JTextField();
 		txtValor.setBounds(88, 303, 235, 33);
 		txtValor.setEnabled(false);
 		panel.add(txtValor);
 		txtValor.setColumns(10);
+
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Valor de la Reserva");
 		lblNewLabel_1_1_1.setBounds(88, 278, 133, 14);
 		lblNewLabel_1_1_1.setFont(new Font("Arial", Font.PLAIN, 14));
 		panel.add(lblNewLabel_1_1_1);
 		
-		JComboBox txtFormaPago = new JComboBox();
+		txtFormaPago = new JComboBox();
 		txtFormaPago.setBounds(88, 373, 235, 33);
 		txtFormaPago.setFont(new Font("Arial", Font.PLAIN, 14));
-		txtFormaPago.setModel(new DefaultComboBoxModel(new String[] {"Tarjeta de CrÃ©dito", "Tarjeta de DÃ©bito", "Dinero en efectivo"}));
+		txtFormaPago.setModel(new DefaultComboBoxModel(new String[] {"Tarjeta de Crédito", "Tarjeta de Débito", "Dinero en efectivo"}));
 		panel.add(txtFormaPago);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Forma de pago");
@@ -116,13 +149,38 @@ public class Reservas extends JFrame {
 		lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 20));
 		panel.add(lblNewLabel_4);
 		
-		JButton btnReservar = new JButton("Continuar");
+		txtFechaE.getDateEditor().addPropertyChangeListener(new PropertyChangeListener(){ 
+	        public void propertyChange(PropertyChangeEvent e) {
+	        	if(txtFechaE.getDate() != null && txtFechaS.getDate() != null) {
+	        		reserva = new Reserva(txtFechaE.getDate(), txtFechaS.getDate(), (String)txtFormaPago.getSelectedItem());
+	        		txtValor.setText(String.valueOf(reserva.getValorReserva()));	        
+	        	}
+	        }
+		});
+		
+		txtFechaS.getDateEditor().addPropertyChangeListener(new PropertyChangeListener(){ 
+	        public void propertyChange(PropertyChangeEvent e) {
+	        	if(txtFechaE.getDate() != null && txtFechaS.getDate() != null) {
+	        		reserva = new Reserva(txtFechaE.getDate(), txtFechaS.getDate(), (String)txtFormaPago.getSelectedItem());
+	        		txtValor.setText(String.valueOf(reserva.getValorReserva()));	        
+	        	}
+	        }
+		});
+		
+		txtFormaPago.addActionListener (new ActionListener () {
+		    public void actionPerformed(ActionEvent e) {
+		    	if(txtFechaE.getDate() != null && txtFechaS.getDate() != null) {
+	        		reserva = new Reserva(txtFechaE.getDate(), txtFechaS.getDate(), (String)txtFormaPago.getSelectedItem());
+	        		txtValor.setText(String.valueOf(reserva.getValorReserva()));	        
+	        	}
+		    }
+		});
+		
+		btnReservar = new JButton("Continuar");
 		btnReservar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistroHuesped huesped = new RegistroHuesped();
-				huesped.setVisible(true);
-				dispose();
-			}
+				reservar();				
+			}			
 		});
 		btnReservar.setForeground(Color.WHITE);
 		btnReservar.setBounds(183, 436, 140, 33);
@@ -148,21 +206,77 @@ public class Reservas extends JFrame {
 		lblNewLabel_2.setBounds(15, 6, 104, 107);
 		panel.add(lblNewLabel_2);
 	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
+
+	
+	private void actualizar(int id) {
+		
+		ReservaController reservaController = new ReservaController();
+		var reserva = new Reserva(id, txtFechaE.getDate(), txtFechaS.getDate(),
+				Float.parseFloat(txtValor.getText()), txtFormaPago.getSelectedItem().toString());
+		reservaController.actualizar(reserva);
+
+		JOptionPane.showMessageDialog(this, "Actualizado con Exito.");
+
+		Busqueda busqueda = new Busqueda();
+		busqueda.setVisible(true);
+		dispose();
+
 	}
+	
+	private void reservar() {
+		if (reserva != null) {
+			actualizar(Integer.parseInt(txtid.getText()));
+		}else {
+			ArrayList<String> errores = validarCampos();
+			if(errores.isEmpty()) {
+				reserva = new Reserva(txtFechaE.getDate(), txtFechaS.getDate(), (String)txtFormaPago.getSelectedItem());
+				RegistroHuesped huesped = new RegistroHuesped(reserva);
+				huesped.setVisible(true);
+				dispose();
+			}else {
+				MostrarMensajeError(errores);
+			}
+		}
+	}
+	
+	private ArrayList<String> validarCampos() {
+		ArrayList<String> errores = new ArrayList<>();	
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.set(Calendar.MILLISECOND, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+	    Date date = calendar.getTime();
+	    
+	    
+		if(txtFechaE.getDate() != null && txtFechaS.getDate() != null)	{
+			if(txtFechaE.getDate().compareTo(date) < 0) {
+				System.out.println(txtFechaE.getDate());
+				System.out.println(date);
+				errores.add("-La fecha de check in no puede ser anterior al dia de hoy.");
+			}
+			if(txtFechaS.getDate().compareTo(date) < 0) {
+				errores.add("-La fecha de check out no puede ser anterior al dia de hoy.");
+			}
+			if(txtFechaS.getDate().compareTo(txtFechaE.getDate()) < 0) {
+				errores.add("-La fecha de entrada no puede ocurrir despues que la de salida.");
+			}
+			if(txtFechaE.getDate() == null) {
+				errores.add("-Falta rellenar la fecha de check in.");
+			}else if(txtFechaS.getDate() == null) {
+				errores.add("-Falta rellenar la fecha de check out.");
+			} 
+		}else {
+			errores.add("Falta rellenar las fechas");
+		}
+		
+		return errores;
+	}
+	
+	private void MostrarMensajeError(ArrayList<String> mensajes) {
+	    JOptionPane.showMessageDialog(null, mensajes.toArray(), "Mensaje de Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	
 }

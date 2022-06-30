@@ -78,7 +78,7 @@ public class MenuUsuario extends JFrame {
 		panel_1.setBounds(0, 470, 894, 30);
 		contentPane.add(panel_1);
 		
-		JLabel lblNewLabel_3 = new JLabel("Desarrollado por Fulanita de Tal © 2022");
+		JLabel lblNewLabel_3 = new JLabel("Desarrollado por Juan Pablo Mota A�o 2022");
 		lblNewLabel_3.setForeground(new Color(12, 138, 199));
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 13));
 		panel_1.add(lblNewLabel_3);
@@ -103,7 +103,7 @@ public class MenuUsuario extends JFrame {
 		lblNewLabel_1_1.setBounds(741, 163, 80, 17);
 		contentPane.add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Búsqueda");
+		JLabel lblNewLabel_1_1_1 = new JLabel("Busqueda");
 		lblNewLabel_1_1_1.setForeground(new Color(12, 138, 199));
 		lblNewLabel_1_1_1.setFont(new Font("Arial", Font.BOLD, 16));
 		lblNewLabel_1_1_1.setBounds(741, 274, 80, 17);
