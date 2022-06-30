@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/c3p0-0.9.5.4.jar"/>
 	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/mchange-commons-java-0.2.20.jar"/>
 	<classpathentry kind="lib" path="F:/Curso Alura/Java/ChallengeHotelAlura/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar"/>
+	<classpathentry kind="lib" path="F:/Curso Alura/Java/Conversor-de-Monedas/Libraries/flatlaf-2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

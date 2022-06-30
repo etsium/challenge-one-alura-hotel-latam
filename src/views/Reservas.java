@@ -80,7 +80,6 @@ public class Reservas extends JFrame {
 	}
 	
 	public Reservas() {
-		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Reservas.class.getResource("/imagenes/calendario.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 910, 540);
@@ -224,7 +223,7 @@ public class Reservas extends JFrame {
 	}
 	
 	private void reservar() {
-		if (reserva != null) {
+		if (!txtid.getText().isEmpty()) {
 			actualizar(Integer.parseInt(txtid.getText()));
 		}else {
 			ArrayList<String> errores = validarCampos();

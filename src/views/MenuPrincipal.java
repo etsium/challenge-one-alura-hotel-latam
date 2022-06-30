@@ -3,7 +3,12 @@ package views;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
 import java.awt.Panel;
 import java.awt.Color;
 import java.awt.SystemColor;
@@ -26,8 +31,9 @@ public class MenuPrincipal extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+			public void run() {						
 				try {
+					UIManager.setLookAndFeel(new FlatLightLaf());
 					MenuPrincipal frame = new MenuPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -93,7 +99,7 @@ public class MenuPrincipal extends JFrame {
 		panel_1.setBounds(0, 471, 894, 30);
 		panel.add(panel_1);
 		
-		JLabel lblNewLabel_3 = new JLabel("Desarrollado por Fulanita de Tal Año 2022");
+		JLabel lblNewLabel_3 = new JLabel("Desarrollado por Juan Pablo Mota 2022");
 		lblNewLabel_3.setForeground(new Color(240, 248, 255));
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 13));
 		panel_1.add(lblNewLabel_3);
